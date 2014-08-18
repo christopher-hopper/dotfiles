@@ -79,6 +79,11 @@ shopt -s histappend
 export HISTSIZE=1000
 export HISTFILESIZE=2000
 
+# less 
+#
+# Make less more friendly for non-text input files, see lesspipe(1).
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 # cd Options
 #
 if [ -z $CDPATH ]; then
