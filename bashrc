@@ -70,9 +70,14 @@ fi
 # export HISTIGNORE=$'[ \t]*:&:[fb]g:exit'
 # export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 #
-# Whenever displaying the prompt, write the previous line to disk
-# export PROMPT_COMMAND="history -a"
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+
+# Append to the history file, don't overwrite it.
+shopt -s histappend
+
+# Set the History length.
+export HISTSIZE=1000
+export HISTFILESIZE=2000
 
 # cd Options
 #
