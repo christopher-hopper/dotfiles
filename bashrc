@@ -83,7 +83,7 @@ export SVN_EDITOR='vim'
 #
 # Some people use a different file for aliases
 if [ -f "${HOME}/.bash_alias" ]; then
-  source "${HOME}/.bash_alias"
+  . "${HOME}/.bash_alias"
 fi
 
 # Umask
@@ -98,11 +98,11 @@ fi
 #
 # Some people use a different file for functions
 if [ -f "${HOME}/.bash_function" ]; then
-  source "${HOME}/.bash_function"
+  . "${HOME}/.bash_function"
 fi
 
 # Command-line Prompt 
 #
 if [ -f "${HOME}/.bash_prompt" ]; then
-  source "${HOME}/.bash_prompt"
+  . "${HOME}/.bash_prompt"
 fi
