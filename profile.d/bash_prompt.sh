@@ -4,6 +4,9 @@
 # Check for interactive bash 
 [ -z "$BASH_VERSION" -a -z "$KSH_VERSION" -o -z "$PS1" ] && return
 
+# Check for tput color support
+[ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null || return
+
 #
 # Fancy PWD display function
 #
@@ -50,37 +53,37 @@ bash_prompt() {
          local TITLEBAR="";
          ;;
    esac
-   local NONE="\[\033[0m\]"      # unsets color to term's fg color
+   local NONE="$(tput sgr0)"      # unsets color to term's fg color
 
    # regular colors
-   local K="\[\033[0;30m\]"      # black
-   local R="\[\033[0;31m\]"      # red
-   local G="\[\033[0;32m\]"      # green
-   local Y="\[\033[0;33m\]"      # yellow
-   local B="\[\033[0;34m\]"      # blue
-   local M="\[\033[0;35m\]"      # magenta
-   local C="\[\033[0;36m\]"      # cyan
-   local W="\[\033[0;37m\]"      # white
+   local K="$(tput setaf 0)"      # black
+   local R="$(tput setaf 1)"      # red
+   local G="$(tput setaf 2)"      # green
+   local Y="$(tput setaf 3)"      # yellow
+   local B="$(tput setaf 4)"      # blue
+   local M="$(tput setaf 5)"      # magenta
+   local C="$(tput setaf 6)"      # cyan
+   local W="$(tput setaf 7)"      # white
 
    # emphasized (bolded) colors
-   local EMK="\[\033[1;30m\]"
-   local EMR="\[\033[1;31m\]"
-   local EMG="\[\033[1;32m\]"
-   local EMY="\[\033[1;33m\]"
-   local EMB="\[\033[1;34m\]"
-   local EMM="\[\033[1;35m\]"
-   local EMC="\[\033[1;36m\]"
-   local EMW="\[\033[1;37m\]"
+   local EMK="$(tput setaf 0; tput bold)"
+   local EMR="$(tput setaf 1; tput bold)"
+   local EMG="$(tput setaf 2; tput bold)"
+   local EMY="$(tput setaf 3; tput bold)"
+   local EMB="$(tput setaf 4; tput bold)"
+   local EMM="$(tput setaf 5; tput bold)"
+   local EMC="$(tput setaf 6; tput bold)"
+   local EMW="$(tput setaf 7; tput bold)"
 
    # background colors
-   local BGK="\[\033[40m\]"
-   local BGR="\[\033[41m\]"
-   local BGG="\[\033[42m\]"
-   local BGY="\[\033[43m\]"
-   local BGB="\[\033[44m\]"
-   local BGM="\[\033[45m\]"
-   local BGC="\[\033[46m\]"
-   local BGW="\[\033[47m\]"
+   local BGK="$(tput setab 0)"
+   local BGR="$(tput setab 1)"
+   local BGG="$(tput setab 2)"
+   local BGY="$(tput setab 3)"
+   local BGB="$(tput setab 4)"
+   local BGM="$(tput setab 5)"
+   local BGC="$(tput setab 6)"
+   local BGW="$(tput setab 7)"
 
    local UC=$G                   # user name's color
    local MC=$C                   # machine name's color
