@@ -122,6 +122,10 @@ fi
 
 # Command-line Prompt 
 #
-if [ -f "${HOME}/.bash_prompt" ]; then
-  . "${HOME}/.bash_prompt"
-fi
+# Pluggable command-line prompt.
+for i in ${HOME}/.bash_prompt*; do
+  if [ -f "$i" ]; then
+    . "$i"
+  fi
+done
+unset i
