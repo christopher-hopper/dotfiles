@@ -132,7 +132,7 @@ fi
 #
 # Pluggable command-line prompt.
 for i in ${HOME}/.bash_prompt*; do
-  if [ -f "$i" ]; then
+  if [ -r "$i" ]; then
     . "$i"
   fi
 done
