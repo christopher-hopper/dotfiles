@@ -15,6 +15,14 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
+# System interactive shell settings for bash
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+if [ -f /etc/bash.bashrc ]; then
+    . /etc/bash.bashrc
+fi
+
 # Shell Options
 #
 # See man bash for more options...
