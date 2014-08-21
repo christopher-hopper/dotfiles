@@ -43,12 +43,20 @@
 # alias la='ls -A'                              # all but . and ..
 # alias l='ls -CF'                              #
 
-alias grep='grep --color=auto'                # show differences in colour
-alias egrep='egrep --color=auto'              # show differences in colour
-alias fgrep='fgrep --color=auto'              # show differences in colour
 
-alias ls='ls --color=auto --human-readable --classify --sort=extension --group-directories-first'
-alias ll='ls -l'                                # long list
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+
+    alias ls='ls --color=auto --human-readable --classify --sort=extension --group-directories-first'
+
+    alias grep='grep --color=auto'                # show differences in colour
+    alias egrep='egrep --color=auto'              # show differences in colour
+    alias fgrep='fgrep --color=auto'              # show differences in colour
+fi
+
+# some more ls aliases
+alias ll='ls -al'                               # long list
 alias la='ls -A'                                # all but . and ..
 
 alias vi='vim'                                  # use vi improved
