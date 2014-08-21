@@ -67,6 +67,10 @@ alias vi='vim'                                  # use vi improved
 
 # Drupal code sniffer
 if [ -x /usr/bin/phpcs ] && [ $(/usr/bin/phpcs -i | grep -c 'Drupal') == 1 ]; then
-  alias drupalcs='/usr/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,js,txt,info'
+   alias drupalcs='/usr/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,js,txt,info'
 fi
 
+# Less with vim syntax highlighting (cool)
+if [ -x /usr/share/vim/vimfiles/macros/less.sh ]; then 
+   alias vless='/usr/share/vim/vimfiles/macros/less.sh'
+fi
