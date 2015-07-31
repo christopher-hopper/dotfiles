@@ -1,3 +1,4 @@
+# vim: ft=sh ts=4 sw=3
 # To the extent possible under law, the author(s) have dedicated all 
 # copyright and related and neighboring rights to this software to the 
 # public domain worldwide. This software is distributed without any 
@@ -18,10 +19,10 @@
 
 # System interactive shell settings for bash
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+   . /etc/bashrc
 fi
 if [ -f /etc/bash.bashrc ]; then
-    . /etc/bash.bashrc
+   . /etc/bash.bashrc
 fi
 
 # Shell Options
@@ -46,11 +47,11 @@ shopt -s histappend
 # this, if it's already enabled in /etc/bashrc and /etc/profile
 # sources /etc/bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+   if [ -f /usr/share/bash-completion/bash_completion ]; then
+      . /usr/share/bash-completion/bash_completion
+   elif [ -f /etc/bash_completion ]; then
+      . /etc/bash_completion
+   fi
 fi
 
 # History Options
@@ -99,23 +100,23 @@ export VISUAL='vim'
 # Aliases
 #
 # Some people use a different file for aliases
-if [ -f "${HOME}/.bash_alias" ]; then
-  . "${HOME}/.bash_alias"
+if [ -f "${HOME}/.bash_aliases" ]; then
+   . "${HOME}/.bash_aliases"
 fi
 
 # Functions
 #
 # Some people use a different file for functions
-if [ -f "${HOME}/.bash_function" ]; then
-  . "${HOME}/.bash_function"
+if [ -f "${HOME}/.bash_functions" ]; then
+   . "${HOME}/.bash_functions"
 fi
 
 # Command-line Prompt 
 #
 # Pluggable command-line prompt.
 for i in ${HOME}/.bash_prompt*; do
-  if [ -r "$i" ]; then
-    . "$i"
-  fi
+   if [ -r "$i" ]; then
+      . "$i"
+   fi
 done
 unset i
