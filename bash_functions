@@ -21,3 +21,18 @@
 #   echo -ne "\e]2;$@\a\e]1;$@\a"; 
 # }
 
+# History update
+#
+# Reads the history file into the current shell. Useful for 
+# updating the history after closing a shell open in 
+# another terminal.
+histupdate () 
+{
+    # Remove the last entry from history list
+    TMP=$(history | tail -1 | cut -f22 -d ' ') && test -n $TMP && history -d $TMP
+    # Append new lines to history file 
+    history -a
+    # Read new lines into history list
+    history -n
+}
+
