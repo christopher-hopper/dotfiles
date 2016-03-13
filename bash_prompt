@@ -31,12 +31,14 @@ bash_prompt_command() {
    GIT_PS1='';
    if [ $(type -t "__git_ps1") ]; 
    then
+      GIT_PS1_SHOWCOLORHINTS='';
       GIT_PS1=$(__git_ps1);
    fi
    # Display drush prompt if available. 
    DRUSH_PS1='';
    if [ $(type -t "__drush_ps1") ]; 
    then
+      DRUSH_PS1_SHOWCOLORHINTS='';
       DRUSH_PS1=$(__drush_ps1 " [%s]");
    fi
 }
