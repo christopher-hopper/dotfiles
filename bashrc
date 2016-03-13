@@ -54,6 +54,10 @@ if ! shopt -oq posix; then
    fi
 fi
 
+if [ "$OS" == "cygwin" ] || [ "$OS" == "Windows_NT" ]; then
+   set completion-ignore-case on
+fi
+
 # History Options
 #
 # Ignore some controlling instructions
