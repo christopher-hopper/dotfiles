@@ -67,5 +67,7 @@ fi
 # Less with vim syntax highlighting (cool)
 if [ -x /usr/share/vim/vimfiles/macros/less.sh ]; then 
    alias vless='/usr/share/vim/vimfiles/macros/less.sh'
+elif [ -x "$HOME/.vim/macros/less.sh" ]; then 
+   alias vless="$HOME/.vim/macros/less.sh"
 fi
 
