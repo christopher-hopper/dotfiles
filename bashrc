@@ -95,8 +95,8 @@ export CDPATH;
 # 
 # Set the default text editor to use with various 
 # programs and commands.
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='vim';
+export VISUAL="$EDITOR";
 
 # less 
 #
