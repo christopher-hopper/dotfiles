@@ -146,4 +146,13 @@ for i in ${HOME}/.bash_prompt*; do
    fi
 done
 unset i
+#
+# Configure Git prompt settings.
+# Allowed values described in `bash_prompt_git'. 
+export GIT_PS1_SHOWCOLORHINTS='';
+export GIT_PS1_SHOWDIRTYSTATE='auto';
+export GIT_PS1_SHOWSTASHSTATE='auto'
+export GIT_PS1_SHOWUNTRACKEDFILES='';
+export GIT_PS1_SHOWUPSTREAM='verbose name legacy';
+export GIT_PS1_DESCRIBE_STYLE='branch';
 

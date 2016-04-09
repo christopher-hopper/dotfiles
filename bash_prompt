@@ -99,9 +99,19 @@ bash_prompt() {
 
 # Enable the prompt.
 # Execute this command every time a prompt is drawn
-export PROMPT_COMMAND=bash_prompt_command
+export PROMPT_COMMAND=bash_prompt_command;
 # Define the text to display beside the prompt
 bash_prompt
 # Clean-up the functions we no-longer require
 unset bash_prompt
+
+# Configure Git prompt settings defaults. 
+# These settings provide the best performance. 
+# Allowed values described in `bash_prompt_git'. 
+export GIT_PS1_SHOWCOLORHINTS='';
+export GIT_PS1_SHOWDIRTYSTATE='';
+export GIT_PS1_SHOWSTASHSTATE=''
+export GIT_PS1_SHOWUNTRACKEDFILES='';
+export GIT_PS1_SHOWUPSTREAM='';
+export GIT_PS1_DESCRIBE_STYLE='';
 
