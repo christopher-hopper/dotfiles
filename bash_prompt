@@ -104,3 +104,4 @@ export PROMPT_COMMAND=bash_prompt_command
 bash_prompt
 # Clean-up the functions we no-longer require
 unset bash_prompt
+
