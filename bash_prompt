@@ -1,7 +1,7 @@
 # vim: ft=sh ts=4 sw=3
 # Functions to generate a pretty useful bash prompt
 
-# Check for interactive bash 
+# Check for interactive bash
 [ -z "$BASH_VERSION" -a -z "$KSH_VERSION" -o -z "$PS1" ] && return
 
 #
@@ -29,14 +29,14 @@ bash_prompt_command() {
    fi
    # Display git prompt if available.
    GIT_PS1='';
-   if [ $(type -t "__git_ps1") ]; 
+   if [ $(type -t "__git_ps1") ];
    then
       GIT_PS1_SHOWCOLORHINTS='';
       GIT_PS1=$(__git_ps1);
    fi
-   # Display drush prompt if available. 
+   # Display drush prompt if available.
    DRUSH_PS1='';
-   if [ $(type -t "__drush_ps1") ]; 
+   if [ $(type -t "__drush_ps1") ];
    then
       DRUSH_PS1_SHOWCOLORHINTS='';
       DRUSH_PS1=$(__drush_ps1 " [%s]");
@@ -97,7 +97,7 @@ bash_prompt() {
    # extra backslash in front of closing \$ to make bash colorize the prompt
 }
 
-# Enable the prompt. 
+# Enable the prompt.
 # Execute this command every time a prompt is drawn
 export PROMPT_COMMAND=bash_prompt_command
 # Define the text to display beside the prompt

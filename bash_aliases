@@ -1,7 +1,8 @@
 # vim: ft=sh ts=4 sw=3
-# To the extent possible under law, the author(s) have dedicated all 
-# copyright and related and neighboring rights to this software to the 
-# public domain worldwide. This software is distributed without any warranty. 
+# To the extent possible under law, the author(s) have dedicated all
+# copyright and related and neighboring rights to this software to the
+# public domain worldwide. This software is distributed without any
+# warranty.
 
 # ~/.bash_aliases: executed by bash(1) for login shells.
 
@@ -9,7 +10,7 @@
 # please feel free to customise it to create a shell
 # environment to your liking.  If you feel a change
 # would be benifitial to all, please feel free to send
-# a patch to the dotfiles maintainers. 
+# a patch to the dotfiles maintainers.
 
 # User dependent .bash_aliases file
 #
@@ -65,9 +66,9 @@ if [ -x /usr/bin/phpcs ] && [ $(/usr/bin/phpcs -i | grep -c 'Drupal') == 1 ]; th
 fi
 
 # Less with vim syntax highlighting (cool)
-if [ -x /usr/share/vim/vimfiles/macros/less.sh ]; then 
+if [ -x /usr/share/vim/vimfiles/macros/less.sh ]; then
    alias vless='/usr/share/vim/vimfiles/macros/less.sh'
-elif [ -x "$HOME/.vim/macros/less.sh" ]; then 
+elif [ -x "$HOME/.vim/macros/less.sh" ]; then
    alias vless="$HOME/.vim/macros/less.sh"
 fi
 
