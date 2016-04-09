@@ -1,4 +1,8 @@
 # vim: ft=sh ts=4 sw=3
+#
+# Source:
+# https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
+#
 # bash/zsh git prompt support
 #
 # Copyright (C) 2006,2007 Shawn O. Pearce <spearce@spearce.org>
@@ -530,4 +534,3 @@ __git_ps1 ()
 
 	return $exit
 }
-
