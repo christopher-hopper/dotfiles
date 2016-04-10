@@ -39,9 +39,9 @@ else
 fi
 
 # Interactive file-system operations.
-# alias rm='rm -i'
 # alias cp='cp -i'
-# alias mv='mv -i'
+alias rm='rm -i'
+alias mv='mv -i'
 
 # List command shorthand.
 alias dir='ls --format=vertical'
