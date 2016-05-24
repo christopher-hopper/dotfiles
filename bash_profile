@@ -14,8 +14,9 @@
 
 # User dependent .bash_profile file
 
-# source the users bashrc if it exists
-if [ -f "${HOME}/.bashrc" ] ; then
-  . "${HOME}/.bashrc"
-fi
+# Source the users profile if it exists.
+[[ -f "${HOME}/.profile" ]] && . "${HOME}/.profile";
+
+# Source the users bashrc if it exists.
+[[ -f "${HOME}/.bashrc" ]] && . "${HOME}/.bashrc";
 

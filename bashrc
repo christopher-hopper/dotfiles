@@ -156,3 +156,6 @@ export GIT_PS1_SHOWUNTRACKEDFILES='';
 export GIT_PS1_SHOWUPSTREAM='verbose name legacy';
 export GIT_PS1_DESCRIBE_STYLE='branch';
 
+# Add RVM to PATH for scripting.
+[[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin";
+
