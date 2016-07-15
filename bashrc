@@ -153,7 +153,8 @@ export GIT_PS1_SHOWCOLORHINTS='';
 export GIT_PS1_SHOWDIRTYSTATE='auto';
 export GIT_PS1_SHOWSTASHSTATE='auto'
 export GIT_PS1_SHOWUNTRACKEDFILES='';
-export GIT_PS1_SHOWUPSTREAM='verbose name legacy';
+#export GIT_PS1_SHOWUPSTREAM='verbose name';
+export GIT_PS1_SHOWUPSTREAM='verbose';
 export GIT_PS1_DESCRIBE_STYLE='branch';
 
 # Add RVM to PATH for scripting.
