@@ -141,7 +141,7 @@ fi
 #
 # Pluggable command-line prompt.
 for i in ${HOME}/.bash_prompt*; do
-   if [ -r "$i" ]; then
+   if [ -r "$i" ] && [[ "$i" != *.orig ]]; then
       . "$i"
    fi
 done
