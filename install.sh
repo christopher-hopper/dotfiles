@@ -4,6 +4,7 @@
 DOTREAL="$(readlink -f $0)";
 DOTPATH="${DOTREAL%/*}";
 DOTBAKX="orig~";
+BAKLIST=();
 
 for FILE in $DOTPATH/bash*; do
    echo -n "${FILE##*/}";
@@ -20,6 +21,7 @@ for FILE in $DOTPATH/bash*; do
    then
       echo -n " -> Backup ";
       mv -v "$HOME/.${FILE##*/}" "$HOME/.${FILE##*/}.${DOTBAKX}";
+      BAKLIST=("${BAKLIST[@]}" "$HOME/.${FILE##*/}");
    elif [ -f "$HOME/.${FILE##*/}" ]; 
    then
       echo -n " -> Delete";
@@ -30,3 +32,11 @@ for FILE in $DOTPATH/bash*; do
    cp $FILE  "$HOME/.${FILE##*/}";
 done;
 
+if [[ ${#BAKLIST[@]} -gt 0 ]] && [[ $(which diff) != "" ]]; then
+   echo;
+   echo "Changes:";
+
+   for FILE in ${BAKLIST[@]}; do
+      diff --minimal --context=2 --from-file="${FILE}.${DOTBAKX}" "$FILE";
+   done;
+fi;
