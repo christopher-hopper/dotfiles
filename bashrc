@@ -123,13 +123,6 @@ export VISUAL="$EDITOR";
 # Make less more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Colors
-#
-# Some terminals show colors differently. Let us try to fix that.
-if [ -f "${HOME}/.bash_colors" ]; then
-   . "${HOME}/.bash_colors"
-fi
-
 # Aliases
 #
 # Some people use a different file for aliases.
