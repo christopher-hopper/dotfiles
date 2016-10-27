@@ -1,6 +1,7 @@
 #!/bin/bash
 # vim: ft=sh ts=4 sw=3
-
+function install_dotfiles
+{
 DOTREAL="$(readlink -f $0)";
 DOTPATH="${DOTREAL%/*}";
 DOTBAKX="orig~";
@@ -40,3 +41,8 @@ if [[ ${#BAKLIST[@]} -gt 0 ]] && [[ $(which diff) != "" ]]; then
       diff --minimal --context=2 --from-file="${FILE}.${DOTBAKX}" "$FILE";
    done;
 fi;
+}
+
+install_dotfiles;
+unset install;
+exit 0;
