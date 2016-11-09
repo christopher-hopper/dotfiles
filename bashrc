@@ -160,3 +160,11 @@ export GIT_PS1_DESCRIBE_STYLE='branch';
 # Add RVM to PATH for scripting.
 [[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin";
 
+# Add Composer vendor binaries to PATH.
+if [ -d "${HOME}/.composer/vendor/bin" ]; then
+   PATH="${PATH}:${HOME}/.composer/vendor/bin";
+elif [ -d "${HOME}/.config/composer/vendor/bin" ]; then
+   PATH="${PATH}:${HOME}/.config/composer/vendor/bin";
+fi
+export PATH;
+
