@@ -17,25 +17,27 @@
 
 LSIGNORE='';
 if [ "$OS" == "cygwin" ] || [ "$OS" == "Windows_NT" ]; then
+    LSIGNORE="--human-readable --classify --sort=extension --group-directories-first"
     # On Windows, setup various folders to be ignored in ls commands.
     # This is to hide garbage in my %UserProfile% folder.
-    LSIGNORE="-I NTUSER.DAT\* -I ntuser.dat\* -I AppData\* -I Cookies\*"
+    LSIGNORE="$LSIGNORE -I NTUSER.DAT\* -I ntuser.dat\* -I AppData\* -I Cookies\*"
     LSIGNORE="$LSIGNORE -I ntuser.ini -I NetHood -I PrintHood -I Searches"
     LSIGNORE="$LSIGNORE -I Application\ Data -I Contacts -I Local\ Settings"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    LSIGNORE="-Gh"
 fi
 
-# enable color support of ls and also add handy aliases
+# enable color support of ls and also add handy aliases.
 if [ -x /usr/bin/dircolors ]; then
    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-   alias ls="ls $LSIGNORE --color=auto --human-readable --classify --sort=extension --group-directories-first"
-
+   alias ls="ls $LSIGNORE --color=auto"
    alias grep='grep --color=auto'
    alias egrep='egrep --color=auto'
    alias fgrep='fgrep --color=auto'
    alias less='less -r'
 else
-   alias ls="ls $LSIGNORE --human-readable --classify --sort=extension --group-directories-first"
+   alias ls="ls $LSIGNORE"
 fi
 
 # Interactive file-system operations.
