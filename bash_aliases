@@ -24,20 +24,22 @@ if [ "$OS" == "cygwin" ] || [ "$OS" == "Windows_NT" ]; then
     LSIGNORE="$LSIGNORE -I ntuser.ini -I NetHood -I PrintHood -I Searches"
     LSIGNORE="$LSIGNORE -I Application\ Data -I Contacts -I Local\ Settings"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    LSIGNORE="-Gh"
+   # For BSD and OSX darwin
+   export CLICOLOR=1
+
+   LSIGNORE="-h"
 fi
 
-# enable color support of ls and also add handy aliases.
-if [ -x /usr/bin/dircolors ]; then
-   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+alias ls="ls $LSIGNORE"
 
-   alias ls="ls $LSIGNORE --color=auto"
+# enable color support of ls and also add handy aliases.
+if hash dircolors 2>/dev/null; then
+   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+   ls --color=auto &> /dev/null && alias ls="ls $LSIGNORE --color=auto" ||
    alias grep='grep --color=auto'
    alias egrep='egrep --color=auto'
    alias fgrep='fgrep --color=auto'
    alias less='less -r'
-else
-   alias ls="ls $LSIGNORE"
 fi
 
 # Interactive file-system operations.
