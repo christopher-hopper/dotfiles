@@ -18,10 +18,10 @@
 [[ "$-" != *i* ]] && return
 
 # System interactive shell settings for bash
-if [ -f /etc/bashrc ]; then
+if [[ -f /etc/bashrc ]]; then
    . /etc/bashrc
 fi
-if [ -f /etc/bash.bashrc ]; then
+if [[ -f /etc/bash.bashrc ]]; then
    . /etc/bash.bashrc
 fi
 
@@ -56,7 +56,7 @@ if ! shopt -oq posix; then
    fi
 fi
 
-if [ "$OS" == "cygwin" ] || [ "$OS" == "Windows_NT" ]; then
+if [[ "${OS}" == "cygwin" ]] || [[ "${OS}" == "Windows_NT" ]]; then
    set completion-ignore-case on
 fi
 
@@ -72,7 +72,7 @@ fi
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:l[sla]'
 #
 # Don't put duplicate lines in the history.
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTCONTROL="${HISTCONTROL}${HISTCONTROL+,}ignoredups"
 #
 # Append to the history file, don't overwrite it.
 shopt -s histappend
@@ -84,19 +84,19 @@ export HISTFILESIZE=2000
 # Path Options
 #
 # Set PATH so it includes user's private bin if it exists.
-if [ -d "${HOME}/bin" ] ; then
+if [[ -d "${HOME}/bin" ]]; then
   PATH="${HOME}/bin:${PATH}"
 fi
 export PATH
 
 # Set MANPATH so it includes users' private man if it exists.
-if [ -d "${HOME}/man" ]; then
+if [[ -d "${HOME}/man" ]]; then
   MANPATH="${HOME}/man:${MANPATH}"
 fi
 export MANPATH;
 
 # Set INFOPATH so it includes users' private info if it exists.
-if [ -d "${HOME}/info" ]; then
+if [[ -d "${HOME}/info" ]]; then
   INFOPATH="${HOME}/info:${INFOPATH}"
 fi
 export INFOPATH;
@@ -105,8 +105,8 @@ export INFOPATH;
 #
 # Look in the current path then users' home path when changing
 # directory.
-[[ -n $CDPATH ]] || CDPATH='.';
-[[ -d "$HOME" ]] && CDPATH="$CDPATH:$HOME";
+[[ -n "${CDPATH}" ]] || CDPATH='.';
+[[ -d "${HOME}" ]] && CDPATH="${CDPATH}:${HOME}";
 # Look in the projects code path when changing directory.
 #[[ -d /opt/projects ]] && CDPATH="$CDPATH:/opt/projects";
 export CDPATH;
@@ -121,19 +121,19 @@ export VISUAL="$EDITOR";
 # less
 #
 # Make less more friendly for non-text input files, see lesspipe(1).
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # Aliases
 #
 # Some people use a different file for aliases.
-if [ -f "${HOME}/.bash_aliases" ]; then
+if [[ -f "${HOME}/.bash_aliases" ]]; then
    . "${HOME}/.bash_aliases"
 fi
 
 # Functions
 #
 # Some people use a different file for functions.
-if [ -f "${HOME}/.bash_functions" ]; then
+if [[ -f "${HOME}/.bash_functions" ]]; then
    . "${HOME}/.bash_functions"
 fi
 
@@ -141,7 +141,7 @@ fi
 #
 # Pluggable command-line prompt.
 for i in ${HOME}/.bash_prompt*; do
-   if [ -r "$i" ] && [[ "$i" != *.orig~ ]]; then
+   if [[ -r "$i" ]] && [[ "$i" != *.orig~ ]]; then
       . "$i"
    fi
 done
@@ -157,8 +157,8 @@ export GIT_PS1_SHOWUNTRACKEDFILES='';
 export GIT_PS1_SHOWUPSTREAM='verbose';
 export GIT_PS1_DESCRIBE_STYLE='branch';
 
-# Add RVM to PATH for scripting.
-[[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin";
+# Add Ruby Version Manager binaries to PATH.
+[[ -d "${HOME}/.rvm/bin" ]] && export PATH="${PATH}:${HOME}/.rvm/bin";
 
 # Add Composer vendor binaries to PATH.
 if [ -d "${HOME}/.composer/vendor/bin" ]; then
