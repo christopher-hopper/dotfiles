@@ -160,11 +160,9 @@ export GIT_PS1_DESCRIBE_STYLE='branch';
 # Add Ruby Version Manager binaries to PATH.
 [[ -d "${HOME}/.rvm/bin" ]] && export PATH="${PATH}:${HOME}/.rvm/bin";
 
-# Add Composer vendor binaries to PATH.
-if [ -d "${HOME}/.composer/vendor/bin" ]; then
-   PATH="${PATH}:${HOME}/.composer/vendor/bin";
-elif [ -d "${HOME}/.config/composer/vendor/bin" ]; then
-   PATH="${PATH}:${HOME}/.config/composer/vendor/bin";
+# Add Composer global vendor binaries to PATH.
+if command -v composer 1>/dev/null && [[ -d "$(composer global config bin-dir --absolute 2>/dev/null)" ]]; then
+   PATH="${PATH}:$(composer global config bin-dir --absolute 2>/dev/null)";
+   export PATH;
 fi
-export PATH;
 
