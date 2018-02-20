@@ -166,6 +166,11 @@ if command -v composer 1>/dev/null && [[ -d "$(composer global config bin-dir --
    export PATH;
 fi
 
+# Initialise symfony-autocomplete command completion.
+if command -v symfony-autocomplete 1>/dev/null; then
+   eval "$(symfony-autocomplete)";
+fi
+
 # Add nvm (Node Version Manager) support.
 if [[ -d "${HOME}/.nvm" ]]; then
    export NVM_DIR="${HOME}/.nvm"
