@@ -2,7 +2,7 @@
 # vim: ft=sh ts=4 sw=3
 function install_dotfiles
 {
-DOTREAL="$(readlink -f $0)";
+DOTREAL="$(readlink -f "${0}")";
 DOTPATH="${DOTREAL%/*}";
 DOTBAKX="orig~";
 BAKLIST=();
@@ -30,14 +30,14 @@ for FILE in $DOTPATH/bash*; do
    fi;
    
    echo " -> Copy";
-   cp $FILE  "$HOME/.${FILE##*/}";
+   cp "${FILE}"  "$HOME/.${FILE##*/}";
 done;
 
 if [[ ${#BAKLIST[@]} -gt 0 ]] && [[ $(which diff) != "" ]]; then
    echo;
    echo "Changes:";
 
-   for FILE in ${BAKLIST[@]}; do
+   for FILE in "${BAKLIST[@]}"; do
       diff --minimal --context=2 --from-file="${FILE}.${DOTBAKX}" "$FILE";
    done;
 fi;
