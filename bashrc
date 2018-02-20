@@ -173,3 +173,10 @@ if [[ -d "${HOME}/.nvm" ]]; then
    [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
 fi
 
+# Add phpenv (PHP Environment) manager support.
+export PHPENV_ROOT="${HOME}/.phpenv"
+if [[ -d "${PHPENV_ROOT}" ]]; then
+   export PATH="${PHPENV_ROOT}/bin:${PATH}"
+   eval "$(phpenv init -)"
+fi
+
