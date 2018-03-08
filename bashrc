@@ -160,17 +160,6 @@ export GIT_PS1_DESCRIBE_STYLE='branch';
 # Add Ruby Version Manager binaries to PATH.
 [[ -d "${HOME}/.rvm/bin" ]] && export PATH="${PATH}:${HOME}/.rvm/bin";
 
-# Add Composer global vendor binaries to PATH.
-if command -v composer 1>/dev/null && [[ -d "$(composer global config bin-dir --absolute 2>/dev/null)" ]]; then
-   PATH="${PATH}:$(composer global config bin-dir --absolute 2>/dev/null)";
-   export PATH;
-fi
-
-# Initialise symfony-autocomplete command completion.
-if command -v symfony-autocomplete 1>/dev/null; then
-   eval "$(symfony-autocomplete)";
-fi
-
 # Add nvm (Node Version Manager) support.
 if [[ -d "${HOME}/.nvm" ]]; then
    export NVM_DIR="${HOME}/.nvm"
@@ -185,3 +174,13 @@ if [[ -d "${PHPENV_ROOT}" ]]; then
    eval "$(phpenv init -)"
 fi
 
+# Add Composer global vendor binaries to PATH.
+if command -v composer 1>/dev/null && [[ -d "$(composer global config bin-dir --absolute 2>/dev/null)" ]]; then
+   PATH="${PATH}:$(composer global config bin-dir --absolute 2>/dev/null)";
+   export PATH;
+fi
+
+# Initialise symfony-autocomplete command completion.
+if command -v symfony-autocomplete 1>/dev/null; then
+   eval "$(symfony-autocomplete)";
+fi
