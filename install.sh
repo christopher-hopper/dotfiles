@@ -7,7 +7,7 @@ DOTPATH="${DOTREAL%/*}";
 DOTBAKX="orig~";
 BAKLIST=();
 
-for FILE in $DOTPATH/bash*; do
+for FILE in $DOTPATH/bash* $DOTPATH/*.conf; do
    echo -n "${FILE##*/}";
    if [[ "$FILE" == *${0##*/} ]]; then
       echo " -> Skip";
