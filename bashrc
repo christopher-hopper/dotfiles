@@ -184,3 +184,9 @@ fi
 if command -v symfony-autocomplete 1>/dev/null; then
    eval "$(symfony-autocomplete)";
 fi
+
+# Add `drush init' completion support.
+[[ -z "${DRUSH_GLOBAL_HOME-}" ]] && [[ -d "${HOME}/.drush" ]] && DRUSH_GLOBAL_HOME="${HOME}/.drush"
+if [[ -f "${DRUSH_GLOBAL_HOME}/drush.complete.sh" ]]; then
+   . "${DRUSH_GLOBAL_HOME}/drush.complete.sh"
+fi
