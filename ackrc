@@ -1,0 +1,40 @@
+# vim: ft=conf ts=4 sw=2
+# To the extent possible under law, the author(s) have dedicated all
+# copyright and related and neighboring rights to this software to the
+# public domain worldwide. This software is distributed without any
+# warranty.
+
+
+# This is the ackrc for ack version 2.14.
+
+# There are four different ways to match
+#
+# is:  Match the filename exactly
+#
+# ext: Match the extension of the filename exactly
+#
+# match: Match the filename against a Perl regular expression
+#
+# firstlinematch: Match the first 250 characters of the first line
+#   of text against a Perl regular expression.  This is only for
+#   the --type-add option.
+
+### Filetypes defined
+
+# Markdown
+# https://spec.commonmark.org/
+--type-set
+markdown:ext:md,markdown,text,txt
+
+# PHP
+# http://www.php.net/
+--type-del=php
+--type-set
+php:ext:hphp,inc,php,phpt,php3,php4,php5,phtml
+
+--type-add
+php:firstlinematch:/^<\?php\b/
+
+--type-add
+php:firstlinematch:/^#!.*\bphp\b/
+

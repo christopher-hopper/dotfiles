@@ -7,7 +7,7 @@ DOTPATH="${DOTREAL%/*}";
 DOTBAKX="orig~";
 BAKLIST=();
 
-for FILE in $DOTPATH/bash* $DOTPATH/*.conf; do
+for FILE in $DOTPATH/bash_* $DOTPATH/*rc $DOTPATH/*.conf; do
    echo -n "${FILE##*/}";
    if [[ "$FILE" == *${0##*/} ]]; then
       echo " -> Skip";
@@ -44,5 +44,5 @@ fi;
 }
 
 install_dotfiles;
-unset install;
+unset install_dotfiles;
 exit 0;
