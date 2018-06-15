@@ -165,8 +165,7 @@ fi;
 
 usage_help ()
 {
-1>&2 echo <<-EOHELP || true
-Usage:
+1>&2 echo "Usage:
   ${__base}.sh [-hn] [-v|vv|vvv] [--help|--verbose|--dryrun|--ansi]
 
 Options:
@@ -181,7 +180,7 @@ Options:
 
  --ansi      Force ANSI (color) output.
 
-EOHELP
+"
 exit 1;
 }
 
