@@ -11,4 +11,4 @@ matrix:
 script:
 #  - shellcheck --shell=bash --exclude=SC1090,SC1091,SC2034,SC2059,SC2046 bashrc bash_profile bash_aliases bash_functions bash_prompt
   - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then    shellcheck install.sh ; fi
-  - ./install.sh --dryrun -vv
+  - bash -v ./install.sh --dryrun -vv
