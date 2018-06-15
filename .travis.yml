@@ -12,6 +12,6 @@ before_install:
 script:
 #  - shellcheck --shell=bash --exclude=SC1090,SC1091,SC2034,SC2059,SC2046 bashrc bash_profile bash_aliases bash_functions bash_prompt
   - shellcheck install.sh
-  - ./install.sh
+  - ./install.sh --dryrun -v
 matrix:
   fast_finish: true
