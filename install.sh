@@ -1,6 +1,15 @@
 #!/bin/bash
 # vim: ft=sh ts=4 sw=3
 
+# Exit on error unless '|| true'.
+set -o errexit
+# Exit on error inside subshells functions.
+set -o errtrace
+# Do not use undefined variables.
+set -o nounset
+# Catch errors in piped commands.
+set -o pipefail
+
 #######################################
 # Globals
 #
@@ -17,10 +26,9 @@ DRY_RUN=false;
 
 #######################################
 # Cleanup before exit
-# Trap signal EXIT
 #
 # Globals:
-#   web_root
+#   None
 # Arguments:
 #   None
 # Returns:
@@ -29,19 +37,20 @@ __cleanup_before_exit ()
 {
   info "Cleaning up. Done!"
 }
+# Trap signal EXIT
 trap __cleanup_before_exit EXIT
 
 #######################################
 # Log
 #
 # Globals:
-#   None
+#   NO_COLOR
+#   TERM
 # Arguments:
 #   log_level
 #   log_line[, ...]
 # Returns:
 #   None
-#######################################
 __log () {
   local log_level="${1}"
   shift
@@ -101,8 +110,14 @@ debug ()     { [[ "${LOG_LEVEL:-0}" -ge 7 ]] && __log debug "${@}"; true; }
 #
 # Install the dotfiles into the current user home directory.
 #
-# @return string
-#   Logging of installation steps and result.
+# Globals:
+#   LOG_LEVEL
+#   DRY_RUN
+#   __invocation
+# Arguments:
+#   None
+# Returns:
+#   None
 install_dotfiles ()
 {
 local DOTPATH;
@@ -118,7 +133,7 @@ debug "
 dotfiles installer
 
     Invoked: $__invocation
-    Path:    $__dir
+    Path:    $DOTPATH
     Backups: *.${DOTBAKX}
     Logging: $LOG_LEVEL
 "
