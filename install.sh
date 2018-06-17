@@ -153,7 +153,7 @@ for FILE in $DOTPATH/bash* $DOTPATH/*.conf; do
    then
       OUTLINE="${OUTLINE} -> Backup ";
       [[ "$DRY_RUN" != true ]] && debug "$(2>&1 mv -v "$HOME/.${FILE##*/}" "$HOME/.${FILE##*/}.${DOTBAKX}")";
-      BAKLIST=("${BAKLIST[@]}" "$HOME/.${FILE##*/}");
+      BAKLIST=(${BAKLIST[@]+"${BAKLIST[@]}"} "$HOME/.${FILE##*/}");
    elif [ -f "$HOME/.${FILE##*/}" ];
    then
       OUTLINE="${OUTLINE} -> Delete";
