@@ -203,8 +203,13 @@ Options:
 #
 
 # Get options and arguments.
+if [[ "$OSTYPE" =~ (darwin|bsd) ]]; then
+   # shellcheck disable=SC2048,2086
+   TMP_OPT=$(getopt hvn $*);
+else
+   TMP_OPT=$(getopt -o hvn --long verbose,help,dryrun,ansi -- "$@");
+fi
 
-TMP_OPT=$(getopt -o hvn --long verbose,help,dryrun,ansi -n "${__base}.sh" -- "$@");
 eval set -- "$TMP_OPT"
 
 while [[ $# -gt 0 ]]; do
