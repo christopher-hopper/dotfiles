@@ -63,11 +63,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # use vi improved
 alias vi='vim'
 
-# Drupal code sniffer
-if [ -x /usr/local/bin/phpcs ] && [ $(/usr/local/bin/phpcs -i | grep -c 'Drupal') == 1 ]; then
-   alias drupalcs='/usr/local/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,js,txt,info'
-fi
-
 # Less with vim syntax highlighting (cool)
 if [ -x /usr/share/vim/vimfiles/macros/less.sh ]; then
    alias vless='/usr/share/vim/vimfiles/macros/less.sh'
