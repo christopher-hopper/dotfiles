@@ -35,7 +35,7 @@ DRY_RUN=false;
 #   None
 __cleanup_before_exit ()
 {
-  info "Cleaning up. Done!"
+   info "Cleaning up. Done!"
 }
 # Trap signal EXIT
 trap __cleanup_before_exit EXIT
@@ -52,48 +52,48 @@ trap __cleanup_before_exit EXIT
 # Returns:
 #   None
 __log () {
-  local log_level="${1}"
-  shift
+   local log_level="${1}"
+   shift
 
-  # shellcheck disable=SC2034
-  local color_debug="\\x1b[35m"
-  # shellcheck disable=SC2034
-  local color_info="\\x1b[32m"
-  # shellcheck disable=SC2034
-  local color_notice="\\x1b[34m"
-  # shellcheck disable=SC2034
-  local color_warning="\\x1b[33m"
-  # shellcheck disable=SC2034
-  local color_error="\\x1b[31m"
-  # shellcheck disable=SC2034
-  local color_critical="\\x1b[1;31m"
-  # shellcheck disable=SC2034
-  local color_alert="\\x1b[1;33;41m"
-  # shellcheck disable=SC2034
-  local color_emergency="\\x1b[1;4;5;33;41m"
+   # shellcheck disable=SC2034
+   local color_debug="\\x1b[35m"
+   # shellcheck disable=SC2034
+   local color_info="\\x1b[32m"
+   # shellcheck disable=SC2034
+   local color_notice="\\x1b[34m"
+   # shellcheck disable=SC2034
+   local color_warning="\\x1b[33m"
+   # shellcheck disable=SC2034
+   local color_error="\\x1b[31m"
+   # shellcheck disable=SC2034
+   local color_critical="\\x1b[1;31m"
+   # shellcheck disable=SC2034
+   local color_alert="\\x1b[1;33;41m"
+   # shellcheck disable=SC2034
+   local color_emergency="\\x1b[1;4;5;33;41m"
 
-  local colorvar="color_${log_level}"
+   local colorvar="color_${log_level}"
 
-  local color="${!colorvar:-${color_error}}"
-  local color_reset="\\x1b[0m"
+   local color="${!colorvar:-${color_error}}"
+   local color_reset="\\x1b[0m"
 
-  if [[ "${NO_COLOR:-}" = true ]] || ( [[ "${TERM:-}" != "xterm"* ]] && [[ "${TERM:-}" != "screen"* ]] ) || [[ ! -t 2 ]]; then
-    if [[ "${NO_COLOR:-}" != false ]]; then
-      # Don't use colors on pipes or non-recognized terminals
-      color=""; color_reset=""
-    fi
-  fi
+   if [[ "${NO_COLOR:-}" = true ]] || ( [[ "${TERM:-}" != "xterm"* ]] && [[ "${TERM:-}" != "screen"* ]] ) || [[ ! -t 2 ]]; then
+      if [[ "${NO_COLOR:-}" != false ]]; then
+         # Don't use colors on pipes or non-recognized terminals
+         color=""; color_reset=""
+      fi
+   fi
 
-  # All remaining arguments are to be printed.
-  local log_line=""
-  local timestamp=""
-  if [[ "${LOG_LEVEL:-0}" -ge 7 ]]; then
-     timestamp="[$(date -u +"%Y-%m-%d %H:%M:%S")] ";
-  fi
+   # All remaining arguments are to be printed.
+   local log_line=""
+   local timestamp=""
+   if [[ "${LOG_LEVEL:-0}" -ge 7 ]]; then
+      timestamp="[$(date -u +"%Y-%m-%d %H:%M:%S")] ";
+   fi
 
-  while IFS=$'\n' read -r log_line; do
-    echo -e "${timestamp}${color}$(printf "[%9s]" "${log_level}")${color_reset} ${log_line}" 1>&2
-  done <<< "${@:-}"
+   while IFS=$'\n' read -r log_line; do
+      echo -e "${timestamp}${color}$(printf "[%9s]" "${log_level}")${color_reset} ${log_line}" 1>&2
+   done <<< "${@:-}"
 }
 
 emergency () {                                  __log emergency "${@}"; exit 1; }
@@ -120,83 +120,82 @@ debug ()     { [[ "${LOG_LEVEL:-0}" -ge 7 ]] && __log debug "${@}"; true; }
 #   None
 install_dotfiles ()
 {
-local DOTPATH;
-local DOTBAKX;
-local BAKLIST;
-local OUTLINE;
+   local DOTPATH;
+   local DOTBAKX;
+   local BAKLIST;
+   local OUTLINE;
 
-DOTPATH="${__dir}";
-DOTBAKX="orig~";
-BAKLIST=();
+   DOTPATH="${__dir}";
+   DOTBAKX="orig~";
+   BAKLIST=();
 
-debug "
-dotfiles installer
+   debug "
+   dotfiles installer
 
-    Invoked: $__invocation
-    Path:    $DOTPATH
-    Backups: *.${DOTBAKX}
-    Logging: $LOG_LEVEL
-"
+   Invoked: $__invocation
+   Path:    $DOTPATH
+   Backups: *.${DOTBAKX}
+   Logging: $LOG_LEVEL
+   "
 
-for FILE in $DOTPATH/bash* $DOTPATH/*.conf; do
-   OUTLINE="${FILE##*/}";
-   if [[ "$FILE" == *${0##*/} ]]; then
-      info "${OUTLINE} -> Skip";
-      continue;
-   fi
-
-   if [ -h "$HOME/.${FILE##*/}" ];
-   then
-      OUTLINE="${OUTLINE} -> Unlink";
-      [[ "$DRY_RUN" != true ]] && debug "$(2>&1 unlink "$HOME/.${FILE##*/}")";
-   elif [ -f "$HOME/.${FILE##*/}" ];
-   then
-      OUTLINE="${OUTLINE} -> Backup ";
-      [[ "$DRY_RUN" != true ]] && debug "$(2>&1 mv -v "$HOME/.${FILE##*/}" "$HOME/.${FILE##*/}.${DOTBAKX}")";
-      BAKLIST=(${BAKLIST[@]+"${BAKLIST[@]}"} "$HOME/.${FILE##*/}");
-   elif [ -f "$HOME/.${FILE##*/}" ];
-   then
-      OUTLINE="${OUTLINE} -> Delete";
-      [[ "$DRY_RUN" != true ]] && debug "$(rm -v "$HOME/.${FILE##*/}")";
-   fi;
-
-   OUTLINE="${OUTLINE} -> Copy";
-   [[ "$DRY_RUN" != true ]] && debug "$(cp -v "$FILE"  "$HOME/.${FILE##*/}")";
-
-   info "${OUTLINE}"
-done;
-
-if [[ "$DRY_RUN" != true ]] && [[ ${#BAKLIST[@]} -gt 0 ]] && command -v diff 1>/dev/null; then
-   for FILE in "${BAKLIST[@]}"; do
-      DIFFLINE="$(diff --minimal --context=2 --from-file="${FILE}.${DOTBAKX}" "$FILE")";
-      if [[ "${DIFFLINE// }" != "" ]]; then
-         info "$FILE -> Changed\n\n$DIFFLINE";
-      else
-         info "$FILE -> Unchanged";
+   for FILE in $DOTPATH/bash* $DOTPATH/*.conf; do
+      OUTLINE="${FILE##*/}";
+      if [[ "$FILE" == *${0##*/} ]]; then
+         info "${OUTLINE} -> Skip";
+         continue;
       fi
+
+      if [ -h "$HOME/.${FILE##*/}" ];
+      then
+         OUTLINE="${OUTLINE} -> Unlink";
+         [[ "$DRY_RUN" != true ]] && debug "$(2>&1 unlink "$HOME/.${FILE##*/}")";
+      elif [ -f "$HOME/.${FILE##*/}" ];
+      then
+         OUTLINE="${OUTLINE} -> Backup ";
+         [[ "$DRY_RUN" != true ]] && debug "$(2>&1 mv -v "$HOME/.${FILE##*/}" "$HOME/.${FILE##*/}.${DOTBAKX}")";
+         BAKLIST=(${BAKLIST[@]+"${BAKLIST[@]}"} "$HOME/.${FILE##*/}");
+      elif [ -f "$HOME/.${FILE##*/}" ];
+      then
+         OUTLINE="${OUTLINE} -> Delete";
+         [[ "$DRY_RUN" != true ]] && debug "$(rm -v "$HOME/.${FILE##*/}")";
+      fi;
+
+      OUTLINE="${OUTLINE} -> Copy";
+      [[ "$DRY_RUN" != true ]] && debug "$(cp -v "$FILE"  "$HOME/.${FILE##*/}")";
+
+      info "${OUTLINE}"
    done;
-fi;
+
+   if [[ "$DRY_RUN" != true ]] && [[ ${#BAKLIST[@]} -gt 0 ]] && command -v diff 1>/dev/null; then
+      for FILE in "${BAKLIST[@]}"; do
+         DIFFLINE="$(diff --minimal --context=2 --from-file="${FILE}.${DOTBAKX}" "$FILE")";
+         if [[ "${DIFFLINE// }" != "" ]]; then
+            info "$FILE -> Changed\n\n$DIFFLINE";
+         else
+            info "$FILE -> Unchanged";
+         fi
+      done;
+   fi;
 }
 
 usage_help ()
 {
-1>&2 echo "Usage:
-  ${__base}.sh [-hn] [-v|vv|vvv] [--help|--verbose|--dryrun|--ansi]
+   1>&2 echo "Usage:
+   ${__base}.sh [-hn] [-v|vv|vvv] [--help|--verbose|--dryrun|--ansi]
 
 Options:
- -h
- --help      Show this help.
+   -h
+   --help      Show this help.
 
- -v
- --verbose   More verbose output.
+   -v
+   --verbose   More verbose output.
 
- -n
- --dryrun    No changes but show result.
+   -n
+   --dryrun    No changes but show result.
 
- --ansi      Force ANSI (color) output.
-
-"
-exit 1;
+   --ansi      Force ANSI (color) output.
+   "
+   exit 0;
 }
 
 #######################################
@@ -209,7 +208,7 @@ TMP_OPT=$(getopt -o hvn --long verbose,help,dryrun,ansi -n "${__base}.sh" -- "$@
 eval set -- "$TMP_OPT"
 
 while [[ $# -gt 0 ]]; do
-   case ${1} in
+   case "${1}" in
       -h | --help )
          usage_help;
          shift ;;
@@ -230,7 +229,7 @@ while [[ $# -gt 0 ]]; do
          break ;;
    esac
 done
-shift $((OPTIND -1))
+shift $((OPTIND-1))
 
 install_dotfiles;
 
