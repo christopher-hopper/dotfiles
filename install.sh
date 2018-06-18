@@ -77,7 +77,7 @@ __log () {
    local color="${!colorvar:-${color_error}}"
    local color_reset="\\x1b[0m"
 
-   if [[ "${NO_COLOR:-}" = true ]] || ( [[ "${TERM:-}" != "xterm"* ]] && [[ "${TERM:-}" != "screen"* ]] ) || [[ ! -t 2 ]]; then
+   if [[ "${NO_COLOR:-}" = false ]] || ( [[ "${TERM:-}" != "xterm"* ]] && [[ "${TERM:-}" != "screen"* ]] ) || [[ ! -t 2 ]]; then
       if [[ "${NO_COLOR:-}" != false ]]; then
          # Don't use colors on pipes or non-recognized terminals
          color=""; color_reset=""
@@ -181,19 +181,16 @@ install_dotfiles ()
 usage_help ()
 {
    1>&2 echo "Usage:
-   ${__base}.sh [-hn] [-v|vv|vvv] [--help|--verbose|--dryrun|--ansi]
+   ${__base}.sh [-hnc] [-v|vv|vvv]
 
 Options:
-   -h
-   --help      Show this help.
+   -h      Show this help.
 
-   -v
-   --verbose   More verbose output.
+   -v      More verbose output.
 
-   -n
-   --dryrun    No changes but show result.
+   -n      No changes but show result.
 
-   --ansi      Force ANSI (color) output.
+   -c      Force ANSI color output.
    "
    exit 0;
 }
@@ -203,27 +200,23 @@ Options:
 #
 
 # Get options and arguments.
-if [[ "$OSTYPE" =~ (darwin|bsd) ]]; then
-   # shellcheck disable=SC2048,2086
-   TMP_OPT=$(getopt hvn $*);
-else
-   TMP_OPT=$(getopt -o hvn --long verbose,help,dryrun,ansi -- "$@");
-fi
+# shellcheck disable=SC2048,2086
+TMP_OPT=$(getopt hvnc $*);
 
 eval set -- "$TMP_OPT"
 
 while [[ $# -gt 0 ]]; do
    case "${1}" in
-      -h | --help )
+      -h )
          usage_help;
          shift ;;
-      --ansi )
+      -c )
          NO_COLOR=false;
          shift ;;
-      -v | --verbose )
+      -v )
          LOG_LEVEL=$((LOG_LEVEL+1));
          shift ;;
-      -n | --dryrun )
+      -n )
          DRY_RUN=true;
          [[ "$LOG_LEVEL" -lt 6 ]] && LOG_LEVEL=6;
          shift ;;
