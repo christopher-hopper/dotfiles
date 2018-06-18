@@ -51,6 +51,8 @@ shopt -s histappend
 if ! shopt -oq posix; then
    if [ -f /usr/share/bash-completion/bash_completion ]; then
       . /usr/share/bash-completion/bash_completion
+   elif [ -f /usr/local/etc/bash_completion ]; then
+      . /usr/local/etc/bash_completion
    elif [ -f /etc/bash_completion ]; then
       . /etc/bash_completion
    fi
@@ -165,6 +167,12 @@ if [[ -d "${HOME}/.nvm" ]]; then
    export NVM_DIR="${HOME}/.nvm"
    [[ -s "$NVM_DIR/nvm.sh" ]] && \. "$NVM_DIR/nvm.sh"
    [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
+fi
+
+# Add Composer vendor binaries to PATH.
+if [[ "$(composer global config bin-dir --absolute 2>/dev/null)" != "" ]]; then
+   PATH="${PATH}:$(composer global config bin-dir --absolute 2>/dev/null)";
+   export PATH;
 fi
 
 # Add phpenv (PHP Environment) manager support.
