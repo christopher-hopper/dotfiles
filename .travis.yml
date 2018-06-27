@@ -12,6 +12,4 @@ script:
   - bash -xv ./install.sh -nv
   - ./install.sh -h
   - ./install.sh
-  - ls .
-  - la .
-  - ll .
+  - . "$HOME/.bashrc" && ls -al "$HOME"
