@@ -1,1 +1,10 @@
-+noall +answer
+# vim: ft=conf ts=4 sw=2
+# To the extent possible under law, the author(s) have dedicated all
+# copyright and related and neighboring rights to this software to the
+# public domain worldwide. This software is distributed without any
+# warranty.
+
+# This is the digrc for DiG version 9.10.3
+#
+# query-options
++nocmd +nostats +question +answer
