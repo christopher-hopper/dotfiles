@@ -169,12 +169,6 @@ if [[ -d "${HOME}/.nvm" ]]; then
    [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
 fi
 
-# Add Composer vendor binaries to PATH.
-if [[ "$(composer global config bin-dir --absolute 2>/dev/null)" != "" ]]; then
-   PATH="${PATH}:$(composer global config bin-dir --absolute 2>/dev/null)";
-   export PATH;
-fi
-
 # Add phpenv (PHP Environment) manager support.
 export PHPENV_ROOT="${HOME}/.phpenv"
 if [[ -d "${PHPENV_ROOT}" ]]; then
