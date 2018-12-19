@@ -15,8 +15,10 @@
 # User dependent .bash_profile file
 
 # Source the users profile if it exists.
-[[ -f "${HOME}/.profile" ]] && . "${HOME}/.profile";
+# shellcheck disable=SC1090
+[[ -f "${HOME}/.profile" ]] && \. "${HOME}/.profile";
 
 # Source the users bashrc if it exists.
-[[ -f "${HOME}/.bashrc" ]] && . "${HOME}/.bashrc";
+# shellcheck disable=SC1090
+[[ -f "${HOME}/.bashrc" ]] && \. "${HOME}/.bashrc";
 
