@@ -129,6 +129,7 @@ export VISUAL="$EDITOR";
 #
 # Some people use a different file for aliases.
 if [[ -f "${HOME}/.bash_aliases" ]]; then
+   # shellcheck disable=SC1090
    . "${HOME}/.bash_aliases"
 fi
 
@@ -136,21 +137,23 @@ fi
 #
 # Some people use a different file for functions.
 if [[ -f "${HOME}/.bash_functions" ]]; then
+   # shellcheck disable=SC1090
    . "${HOME}/.bash_functions"
 fi
 
 # Command-line Prompt
 #
 # Pluggable command-line prompt.
-for i in ${HOME}/.bash_prompt*; do
+for i in "${HOME}"/.bash_prompt*; do
    if [[ -r "$i" ]] && [[ "$i" != *.orig~ ]]; then
+      # shellcheck disable=SC1090
       . "$i"
    fi
 done
 unset i
 #
 # Configure Git prompt settings.
-# Allowed values described in `bash_prompt_git'. 
+# Allowed values described in `bash_prompt_git'.
 export GIT_PS1_SHOWCOLORHINTS='';
 export GIT_PS1_SHOWDIRTYSTATE='auto';
 export GIT_PS1_SHOWSTASHSTATE='auto'
@@ -159,17 +162,25 @@ export GIT_PS1_SHOWUNTRACKEDFILES='';
 export GIT_PS1_SHOWUPSTREAM='verbose';
 export GIT_PS1_DESCRIBE_STYLE='branch';
 
-# Add Ruby Version Manager binaries to PATH.
-[[ -d "${HOME}/.rvm/bin" ]] && export PATH="${PATH}:${HOME}/.rvm/bin";
-
 # Add nvm (Node Version Manager) support.
-if [[ -d "${HOME}/.nvm" ]]; then
-   export NVM_DIR="${HOME}/.nvm"
-   [[ -s "$NVM_DIR/nvm.sh" ]] && \. "$NVM_DIR/nvm.sh"
-   [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
+export NVM_DIR="${HOME}/.nvm"
+# shellcheck disable=SC1090
+[[ -s "$NVM_DIR/nvm.sh" ]] && \. "$NVM_DIR/nvm.sh"
+# shellcheck disable=SC1090
+[[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
+
+# Homebrew Python.
+if [[ -d /usr/local/opt/python/libexec/bin ]]; then
+   export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
 fi
 
-# Add phpenv (PHP Environment) manager support.
+# Add Ruby Version Manager binaries to PATH.
+if [[ -d "${HOME}/.rvm/bin" ]]; then
+   export PATH="${PATH}:${HOME}/.rvm/bin"
+   # shellcheck disable=SC1090
+   [[ -d "${HOME}/.rvm/scripts/rvm" ]] && \. "${HOME}/.rvm/scripts/rvm"
+fi
+
 export PHPENV_ROOT="${HOME}/.phpenv"
 if [[ -d "${PHPENV_ROOT}" ]]; then
    export PATH="${PHPENV_ROOT}/bin:${PATH}"
@@ -177,18 +188,19 @@ if [[ -d "${PHPENV_ROOT}" ]]; then
 fi
 
 # Add Composer global vendor binaries to PATH.
-if command -v composer 1>/dev/null && [[ -d "$(composer global config bin-dir --absolute 2>/dev/null)" ]]; then
-   PATH="${PATH}:$(composer global config bin-dir --absolute 2>/dev/null)";
-   export PATH;
+if [[ -d "$(composer global config bin-dir --absolute 2>/dev/null)" ]]; then
+   PATH="${PATH}:$(composer global config bin-dir --absolute 2>/dev/null)"
+   export PATH
 fi
 
 # Initialise symfony-autocomplete command completion.
 if command -v symfony-autocomplete 1>/dev/null; then
-   eval "$(symfony-autocomplete)";
+   eval "$(symfony-autocomplete)"
 fi
 
 # Add `drush init' completion support.
 [[ -z "${DRUSH_GLOBAL_HOME-}" ]] && [[ -d "${HOME}/.drush" ]] && DRUSH_GLOBAL_HOME="${HOME}/.drush"
 if [[ -f "${DRUSH_GLOBAL_HOME}/drush.complete.sh" ]]; then
+   # shellcheck disable=SC1090
    . "${DRUSH_GLOBAL_HOME}/drush.complete.sh"
 fi
