@@ -174,6 +174,12 @@ if [[ -d /usr/local/opt/python/libexec/bin ]]; then
    export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
 fi
 
+# Python Pipenv.
+if command -v python 1>/dev/null && [[ -d "$(python -m site --user-base 2>/dev/null)"/bin ]]; then
+   PATH="$(python -m site --user-base)/bin:${PATH}"
+   export PATH
+fi
+
 # Add Ruby Version Manager binaries to PATH.
 if [[ -d "${HOME}/.rvm/bin" ]]; then
    export PATH="${PATH}:${HOME}/.rvm/bin"

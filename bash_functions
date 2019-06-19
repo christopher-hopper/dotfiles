@@ -30,7 +30,7 @@
 histupdate ()
 {
    # Remove the last entry from history list
-   TMP=$(history | tail -1 | cut -f22 -d ' ') && test -n $TMP && history -d $TMP
+   TMP="$(history | tail -1 | cut -f 2,2 -d ' ')" && test -n "$TMP" && history -d "$TMP"
    # Append new lines to history file
    history -a
    # Read new lines into history list
