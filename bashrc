@@ -1,4 +1,5 @@
 # vim: ft=sh ts=4 sw=3
+# shellcheck disable=SC1090,SC1091
 # To the extent possible under law, the author(s) have dedicated all
 # copyright and related and neighboring rights to this software to the
 # public domain worldwide. This software is distributed without any
@@ -129,7 +130,6 @@ export VISUAL="$EDITOR";
 #
 # Some people use a different file for aliases.
 if [[ -f "${HOME}/.bash_aliases" ]]; then
-   # shellcheck disable=SC1090
    . "${HOME}/.bash_aliases"
 fi
 
@@ -137,7 +137,6 @@ fi
 #
 # Some people use a different file for functions.
 if [[ -f "${HOME}/.bash_functions" ]]; then
-   # shellcheck disable=SC1090
    . "${HOME}/.bash_functions"
 fi
 
@@ -146,7 +145,6 @@ fi
 # Pluggable command-line prompt.
 for i in "${HOME}"/.bash_prompt*; do
    if [[ -r "$i" ]] && [[ "$i" != *.orig~ ]]; then
-      # shellcheck disable=SC1090
       . "$i"
    fi
 done
@@ -164,9 +162,8 @@ export GIT_PS1_DESCRIBE_STYLE='branch';
 
 # Add nvm (Node Version Manager) support.
 export NVM_DIR="${HOME}/.nvm"
-# shellcheck disable=SC1090
+export NVM_SYMLINK_CURRENT=true
 [[ -s "$NVM_DIR/nvm.sh" ]] && \. "$NVM_DIR/nvm.sh"
-# shellcheck disable=SC1090
 [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
 
 # Homebrew Python.
@@ -183,7 +180,6 @@ fi
 # Add Ruby Version Manager binaries to PATH.
 if [[ -d "${HOME}/.rvm/bin" ]]; then
    export PATH="${PATH}:${HOME}/.rvm/bin"
-   # shellcheck disable=SC1090
    [[ -d "${HOME}/.rvm/scripts/rvm" ]] && \. "${HOME}/.rvm/scripts/rvm"
 fi
 
