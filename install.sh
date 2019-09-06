@@ -138,7 +138,7 @@ install_dotfiles ()
    Logging: $LOG_LEVEL
    "
 
-   for FILE in $DOTPATH/bash_* $DOTPATH/*rc $DOTPATH/*.conf; do
+   for FILE in "$DOTPATH"/bash_* "$DOTPATH"/*rc "$DOTPATH"/*.conf; do
       OUTLINE="${FILE##*/}";
       if [[ "$FILE" == *${0##*/} ]]; then
          info "${OUTLINE} -> Skip";
