@@ -182,6 +182,13 @@ if [[ -d "${HOME}/.rvm/bin" ]]; then
    [[ -d "${HOME}/.rvm/scripts/rvm" ]] && \. "${HOME}/.rvm/scripts/rvm"
 fi
 
+# Add Ruby Environment switcher support.
+export RBENV_ROOT="${HOME}/.rbenv"
+if [[ -d "${RBENV_ROOT}" ]]; then
+   eval "$(rbenv init -)"
+fi
+
+# Add PHP Environment switcher support.
 export PHPENV_ROOT="${HOME}/.phpenv"
 if [[ -d "${PHPENV_ROOT}" ]]; then
    export PATH="${PHPENV_ROOT}/bin:${PATH}"
