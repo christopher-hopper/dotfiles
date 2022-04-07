@@ -159,6 +159,11 @@ export GIT_PS1_SHOWUNTRACKEDFILES='';
 export GIT_PS1_SHOWUPSTREAM='verbose';
 export GIT_PS1_DESCRIBE_STYLE='branch';
 
+# Apple
+#
+# On macOS tell ssh-add to use the keychain.
+export APPLE_SSH_ADD_BEHAVIOR=macos
+
 # Add nvm (Node Version Manager) support.
 export NVM_DIR="${HOME}/.nvm"
 export NVM_SYMLINK_CURRENT=true
