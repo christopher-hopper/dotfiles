@@ -170,9 +170,9 @@ export NVM_SYMLINK_CURRENT=true
 [[ -s "$NVM_DIR/nvm.sh" ]] && \. "$NVM_DIR/nvm.sh"
 [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
 
-# Homebrew Python.
-if [[ -d /usr/local/opt/python/libexec/bin ]]; then
-   export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
+# Homebrew unversioned Python.
+if [[ -d "$(brew --prefix 2>/dev/null)/opt/python/libexec/bin" ]]; then
+   export PATH="$(brew --prefix 2>/dev/null)/opt/python/libexec/bin:${PATH}"
 fi
 
 # Python Pipenv.
