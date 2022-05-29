@@ -91,16 +91,16 @@ if [[ -d /usr/local/sbin ]]; then
    export PATH="/usr/local/sbin:${PATH}"
 fi
 # Set PATH so it includes user's private bin if it exists.
-if [[ -d "${HOME}/bin" ]]; then
-  export PATH="${HOME}/bin:${PATH}"
+if [[ -d "${HOME}/.local/bin" ]]; then
+  export PATH="${HOME}/.local/bin:${PATH}"
 fi
 # Set MANPATH so it includes users' private man if it exists.
-if [[ -d "${HOME}/man" ]]; then
-  export MANPATH="${HOME}/man:${MANPATH}"
+if [[ -d "${HOME}/.local/man" ]]; then
+  export MANPATH="${HOME}/.local/man:${MANPATH}"
 fi
 # Set INFOPATH so it includes users' private info if it exists.
-if [[ -d "${HOME}/info" ]]; then
-  export INFOPATH="${HOME}/info:${INFOPATH}"
+if [[ -d "${HOME}/.local/info" ]]; then
+  export INFOPATH="${HOME}/.local/info:${INFOPATH}"
 fi
 
 # Set CDPATH so it includes users' home folder.

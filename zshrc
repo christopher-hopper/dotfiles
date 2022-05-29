@@ -17,6 +17,25 @@ fi
 #
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 
+# Path Options
+#
+# Set PATH so it includes local system admin programs.
+if [[ -d /usr/local/sbin ]]; then
+   export PATH="/usr/local/sbin:${PATH}"
+fi
+# Set PATH so it includes user's private bin if it exists.
+if [[ -d "${HOME}/.local/bin" ]]; then
+  export PATH="${HOME}/.local/bin:${PATH}"
+fi
+# Set MANPATH so it includes users' private man if it exists.
+if [[ -d "${HOME}/.local/man" ]]; then
+  export MANPATH="${HOME}/.local/man:${MANPATH}"
+fi
+# Set INFOPATH so it includes users' private info if it exists.
+if [[ -d "${HOME}/.local/info" ]]; then
+  export INFOPATH="${HOME}/.local/info:${INFOPATH}"
+fi
+
 # Editor Options
 #
 # Set the default text editor to use with various
