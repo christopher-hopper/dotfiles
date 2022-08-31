@@ -1,0 +1,14 @@
+[log]
+    mailmap = true
+[pull]
+    ff = only
+[alias]
+    # one-line log
+    ls = log --pretty=format:"%C(yellow)%h\\ %Cgreen%ad%Cred%d\\ %Creset%s%Cblue\\ [%cN]" --decorate --date=relative
+    ll = log --pretty=format:"%C(yellow)%h\\ %Cgreen%ad%Cred%d\\ %Creset%s%Cblue\\ [%cN]" --decorate --date=relative --numstat
+
+    # list branches sorted by last modified.
+    lsb = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+    # list aliases
+    lsa = "!git config -l | grep alias | cut -c 7-"
