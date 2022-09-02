@@ -12,3 +12,5 @@
 
     # list aliases
     lsa = "!git config -l | grep alias | cut -c 7-"
+
+    ghpr = "!ghf() { git fetch \"$1\" pull/\"$2\"/head:gh-pr/\"$2\"; }; ghf"
