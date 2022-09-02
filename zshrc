@@ -48,6 +48,8 @@ export VISUAL="$EDITOR";
 # On macOS tell ssh-add to use the keychain.
 export APPLE_SSH_ADD_BEHAVIOR=macos
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 # Add nvm (Node Version Manager) support.
 export NVM_DIR="${HOME}/.nvm"
 export NVM_SYMLINK_CURRENT=true
