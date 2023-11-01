@@ -1,4 +1,4 @@
-# vim: ft=sh ts=4 sw=2
+# vim: ft=zsh ts=4 sw=2
 #
 # Executes commands at the start of an interactive session.
 #
@@ -16,6 +16,15 @@ fi
 # Customize to your needs...
 #
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
+
+# Erase history in current session.
+function erase_history {
+  local HISTSIZE=0;
+}
+function zshaddhistory_erase_history {
+  [[ $1 != [[:space:]]#erase_history[[:space:]]# ]]
+}
+zshaddhistory_functions+=(zshaddhistory_erase_history)
 
 # Path Options
 #
