@@ -112,3 +112,8 @@ $RECYCLE.BIN/
 # Shortcuts.
 *.lnk
 
+# App files
+# --------
+# - Docker
+# --------
+docker-compose.override.yml
