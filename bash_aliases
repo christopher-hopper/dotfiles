@@ -57,7 +57,7 @@ fi
 
 # Interactive file-system operations.
 # alias cp='cp -i'
-alias rm='rm -i'
+alias rm='rm -I'
 alias mv='mv -i'
 
 # List command shorthand.
