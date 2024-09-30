@@ -1,4 +1,4 @@
-# vim: ft=sh ts=4 sw=3
+# vim: ft=bash ts=4 sw=3
 # shellcheck disable=SC1090,SC1091
 # To the extent possible under law, the author(s) have dedicated all
 # copyright and related and neighboring rights to this software to the
@@ -176,9 +176,15 @@ if [[ -d "$(brew --prefix 2>/dev/null)/opt/python/libexec/bin" ]]; then
 fi
 
 # Python Pipenv.
-if command -v python 1>/dev/null && [[ -d "$(python -m site --user-base 2>/dev/null)"/bin ]]; then
-   PATH="$(python -m site --user-base)/bin:${PATH}"
-   export PATH
+# if command -v python 1>/dev/null && [[ -d "$(python -m site --user-base 2>/dev/null)"/bin ]]; then
+#    export PATH="$(python -m site --user-base)/bin:${PATH}"
+# fi
+
+# Python pyenv.
+if command -v pyenv 1>/dev/null; then
+   export PYENV_ROOT="$HOME/.pyenv"
+   [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+   eval "$(pyenv init -)"
 fi
 
 # Add Ruby Version Manager binaries to PATH.

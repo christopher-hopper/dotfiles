@@ -1,4 +1,4 @@
-# vim: ft=zsh ts=4 sw=2
+# vim: ft=bash ts=4 sw=2
 #
 # Executes commands at the start of an interactive session.
 #
@@ -71,9 +71,16 @@ if [[ -d "$(brew --prefix 2>/dev/null)/opt/python/libexec/bin" ]]; then
 fi
 
 # Python Pipenv.
-if command -v python 1>/dev/null && [[ -d "$(python -m site --user-base 2>/dev/null)"/bin ]]; then
-   PATH="$(python -m site --user-base)/bin:${PATH}"
-   export PATH
+# if command -v python 1>/dev/null && [[ -d "$(python -m site --user-base 2>/dev/null)"/bin ]]; then
+#    PATH="$(python -m site --user-base)/bin:${PATH}"
+#    export PATH
+# fi
+
+# Python pyenv.
+if command -v pyenv 1>/dev/null; then
+   export PYENV_ROOT="$HOME/.pyenv"
+   [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+   eval "$(pyenv init -)"
 fi
 
 # Add Ruby Version Manager binaries to PATH.
