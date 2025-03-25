@@ -10,6 +10,9 @@ set -o nounset
 # Catch errors in piped commands.
 set -o pipefail
 
+# Enable extended globbing.
+shopt -s extglob
+
 #######################################
 # Globals
 #
@@ -104,6 +107,42 @@ warning ()   { [[ "${LOG_LEVEL:-0}" -ge 4 ]] && __log warning "${@}"; true; }
 notice ()    { [[ "${LOG_LEVEL:-0}" -ge 5 ]] && __log notice "${@}"; true; }
 info ()      { [[ "${LOG_LEVEL:-0}" -ge 6 ]] && __log info "${@}"; true; }
 debug ()     { [[ "${LOG_LEVEL:-0}" -ge 7 ]] && __log debug "${@}"; true; }
+
+
+
+#######################################
+# install zsh prezto
+#
+# Install zsh prezto into the current user home directory.
+#
+# Globals:
+#   LOG_LEVEL
+#   DRY_RUN
+#   __invocation
+# Arguments:
+#   None
+# Returns:
+#   None
+install_prezto ()
+{
+   local RCFILE;
+
+   if [[ -d "${HOME}/.zprezto" ]]; then
+      info "prezto -> Skip"
+   else
+     info "prezto -> Install"
+     [[ "$DRY_RUN" != true ]] && git clone --recursive https://github.com/sorin-ionescu/prezto.git "${HOME}/.zprezto"
+   fi
+
+   for RCFILE in "${HOME}"/.zprezto/runcoms/!(README.md); do
+      if [[ ! -f "$HOME/.${RCFILE##*/}" ]]; then
+        info "${RCFILE##*/} -> Install"
+        [[ "$DRY_RUN" != true ]] && debug "$(2>&1 ln -s "${RCFILE}" "$HOME/.${RCFILE##*/}")";
+      else
+        info "${RCFILE##*/} -> Skip";
+      fi
+   done
+}
 
 #######################################
 # install dotfiles
@@ -230,5 +269,6 @@ done
 shift $((OPTIND-1))
 
 install_dotfiles;
+install_prezto;
 
 exit 0;
