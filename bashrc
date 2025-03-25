@@ -217,3 +217,6 @@ if command -v symfony-autocomplete 1>/dev/null; then
    eval "$(symfony-autocomplete)"
 fi
 
+# semantic version sv4git config.
+export SV4GIT_HOME="$HOME/.sv4git"
+
