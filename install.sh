@@ -127,11 +127,18 @@ install_prezto ()
 {
    local RCFILE;
 
+   if [[ -x /bin/zsh ]] || [[ -x /usr/bin/zsh ]]; then
+      info "zsh -> Detected";
+   else
+      info "zsh -> Not detected";
+      return 0;
+   fi
+
    if [[ -d "${HOME}/.zprezto" ]]; then
       info "prezto -> Skip"
    else
      info "prezto -> Install"
-     [[ "$DRY_RUN" != true ]] && git clone --recursive https://github.com/sorin-ionescu/prezto.git "${HOME}/.zprezto"
+     [[ "$DRY_RUN" != true ]] && debug "$(2>&1 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${HOME}/.zprezto")"
    fi
 
    for RCFILE in "${HOME}"/.zprezto/runcoms/!(README.md); do
