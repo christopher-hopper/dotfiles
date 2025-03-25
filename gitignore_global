@@ -1,3 +1,23 @@
+# Git global ignore: Editor, Operating System
+# ----------------------------------------------
+#  Please use Git config core.excludesFile to add global rules
+#  specific to your Operating System and Editor choices.
+#
+#      git config --global core.excludesFile '~/.gitignore_global'
+#
+#  Alternatively, Git will ignore file and directory patterns listed
+#  in the global config file '~/.config/git/ignore'. So you could copy
+#  this file into '~/.config/git/ignore' instead.
+#
+#  See https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreexcludesFile
+#
+#  Below are common gitignore rules for editors and OS files.
+#
+#  See https://github.com/github/gitignore
+#
+#  Imagine having to maintain all this in every Git repository!
+#
+
 # Editor files
 # ------------
 # - Vim
