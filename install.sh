@@ -214,12 +214,13 @@ install_dotfiles ()
 
    if [[ "$DRY_RUN" != true ]] && [[ ${#BAKLIST[@]} -gt 0 ]] && command -v diff 1>/dev/null; then
       for FILE in "${BAKLIST[@]}"; do
-         DIFFLINE="$(diff --minimal --context=2 --from-file="${FILE}.${DOTBAKX}" "$FILE")";
+         DIFFLINE="$(diff --minimal --context=2 "${FILE}.${DOTBAKX}" "$FILE")";
          if [[ "${DIFFLINE// }" != "" ]]; then
             info "$FILE -> Changed\n\n$DIFFLINE";
          else
             info "$FILE -> Unchanged";
          fi
+         debug "$(rm -v "${FILE}.${DOTBAKX}")"
       done;
    fi;
 }
