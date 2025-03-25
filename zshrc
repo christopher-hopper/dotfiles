@@ -70,19 +70,6 @@ if [[ -d "$(brew --prefix 2>/dev/null)/opt/python/libexec/bin" ]]; then
    export PATH="$(brew --prefix 2>/dev/null)/opt/python/libexec/bin:${PATH}"
 fi
 
-# Python Pipenv.
-# if command -v python 1>/dev/null && [[ -d "$(python -m site --user-base 2>/dev/null)"/bin ]]; then
-#    PATH="$(python -m site --user-base)/bin:${PATH}"
-#    export PATH
-# fi
-
-# Python pyenv.
-if command -v pyenv 1>/dev/null; then
-   export PYENV_ROOT="$HOME/.pyenv"
-   [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-   eval "$(pyenv init -)"
-fi
-
 # Add Ruby Version Manager binaries to PATH.
 if [[ -d "${HOME}/.rvm/bin" ]]; then
    export PATH="${PATH}:${HOME}/.rvm/bin"
