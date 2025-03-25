@@ -127,6 +127,15 @@ install_prezto ()
 {
    local RCFILE;
 
+   debug "
+   Function: ${FUNCNAME[*]}
+
+   Invoked: $__invocation
+   Logging: $LOG_LEVEL
+   Dry Run: $DRY_RUN
+   "
+
+
    if [[ -x /bin/zsh ]] || [[ -x /usr/bin/zsh ]]; then
       info "zsh -> Detected";
    else
@@ -176,12 +185,13 @@ install_dotfiles ()
    BAKLIST=();
 
    debug "
-   dotfiles installer
+   Function: ${FUNCNAME[*]}
 
    Invoked: $__invocation
    Path:    $DOTPATH
    Backups: *.${DOTBAKX}
    Logging: $LOG_LEVEL
+   Dry Run: $DRY_RUN
    "
 
    for FILE in "$DOTPATH"/bash_* "$DOTPATH"/*rc "$DOTPATH"/*.conf; do
