@@ -44,6 +44,7 @@ zstyle ':prezto:load' pmodule \
   'homebrew' \
   'node' \
   'osx' \
+  'python' \
   'rsync' \
   'ssh' \
   'syntax-highlighting' \
@@ -142,10 +143,10 @@ zstyle ':prezto:module:prompt' theme 'paradox'
 #
 
 # Auto switch the Python virtualenv on directory change.
-# zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 
 # Automatically initialize virtualenvwrapper if pre-requisites are met.
-# zstyle ':prezto:module:python:virtualenv' initialize 'yes'
+zstyle ':prezto:module:python:virtualenv' initialize 'yes'
 
 #
 # Ruby
