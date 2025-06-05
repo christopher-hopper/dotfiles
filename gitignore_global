@@ -68,6 +68,13 @@ atlassian-ide-plugin.xml
 # Built Visual Studio Code Extensions.
 *.vsix
 
+# ---------------
+# - Windsurf
+# ---------------
+
+# Windsurf plugin workspace rules.
+.windsurfrules
+
 
 # OS files
 # ---------------
