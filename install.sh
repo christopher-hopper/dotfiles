@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # vim: ft=sh ts=4 sw=3
+# shellcheck disable=SC2317
 
 # Exit on error unless '|| true'.
 set -o errexit
@@ -235,6 +236,37 @@ install_dotfiles ()
    fi;
 }
 
+#######################################
+# install ghostty config
+#
+# Globals:
+#   LOG_LEVEL
+#   DRY_RUN
+#   __invocation
+# Arguments:
+#   None
+# Returns:
+#   None
+install_ghostty ()
+{
+   debug "
+   Function: ${FUNCNAME[*]}
+
+   Invoked: $__invocation
+   Logging: $LOG_LEVEL
+   Dry Run: $DRY_RUN
+   "
+
+   local _ghcf="$HOME/.config/ghostty/config"
+
+   if [[ -e "${_ghcf}" ]]; then
+      info "ghostty -> Skip"
+   else
+     info "ghostty -> Install"
+     [[ "$DRY_RUN" != true ]] && debug "$(2>&1 mkdir -vp "$(dirname "${_ghcf}")" && cp -v "ghostty_config" "${_ghcf}")";
+   fi
+}
+
 usage_help ()
 {
    1>&2 echo "Usage:
@@ -286,6 +318,7 @@ while [[ $# -gt 0 ]]; do
 done
 shift $((OPTIND-1))
 
+install_ghostty;
 install_dotfiles;
 install_prezto;
 
