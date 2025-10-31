@@ -55,7 +55,10 @@ export VISUAL="$EDITOR";
 # Apple
 #
 # On macOS tell ssh-add to use the keychain.
-export APPLE_SSH_ADD_BEHAVIOR=macos
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  export APPLE_SSH_ADD_BEHAVIOR=macos
+  /usr/bin/ssh-add --apple-load-keychain -q
+fi
 
 # Add nvm (Node Version Manager) support.
 export NVM_DIR="${HOME}/.nvm"
