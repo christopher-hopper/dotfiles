@@ -175,18 +175,6 @@ if [[ -d "$(brew --prefix 2>/dev/null)/opt/python/libexec/bin" ]]; then
    export PATH="$(brew --prefix 2>/dev/null)/opt/python/libexec/bin:${PATH}"
 fi
 
-# Add Ruby Version Manager binaries to PATH.
-if [[ -d "${HOME}/.rvm/bin" ]]; then
-   export PATH="${PATH}:${HOME}/.rvm/bin"
-   [[ -d "${HOME}/.rvm/scripts/rvm" ]] && \. "${HOME}/.rvm/scripts/rvm"
-fi
-
-# Add Ruby Environment switcher support.
-export RBENV_ROOT="${HOME}/.rbenv"
-if [[ -d "${RBENV_ROOT}" ]]; then
-   eval "$(rbenv init -)"
-fi
-
 # Add PHP Environment switcher support.
 export PHPENV_ROOT="${HOME}/.phpenv"
 if [[ -d "${PHPENV_ROOT}" ]]; then

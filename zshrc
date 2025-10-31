@@ -57,8 +57,6 @@ export VISUAL="$EDITOR";
 # On macOS tell ssh-add to use the keychain.
 export APPLE_SSH_ADD_BEHAVIOR=macos
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 # Add nvm (Node Version Manager) support.
 export NVM_DIR="${HOME}/.nvm"
 export NVM_SYMLINK_CURRENT=true
@@ -68,18 +66,6 @@ export NVM_SYMLINK_CURRENT=true
 # Homebrew unversioned Python.
 if [[ -d "$(brew --prefix 2>/dev/null)/opt/python/libexec/bin" ]]; then
    export PATH="$(brew --prefix 2>/dev/null)/opt/python/libexec/bin:${PATH}"
-fi
-
-# Add Ruby Version Manager binaries to PATH.
-if [[ -d "${HOME}/.rvm/bin" ]]; then
-   export PATH="${PATH}:${HOME}/.rvm/bin"
-   [[ -d "${HOME}/.rvm/scripts/rvm" ]] && \. "${HOME}/.rvm/scripts/rvm"
-fi
-
-# Add Ruby Environment switcher support.
-export RBENV_ROOT="${HOME}/.rbenv"
-if [[ -d "${RBENV_ROOT}" ]]; then
-   eval "$(rbenv init -)"
 fi
 
 # Add PHP Environment switcher support.
