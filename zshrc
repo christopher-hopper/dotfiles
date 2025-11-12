@@ -17,15 +17,6 @@ fi
 #
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 
-# Erase history in current session.
-function erase_history {
-  local HISTSIZE=0;
-}
-function zshaddhistory_erase_history {
-  [[ $1 != [[:space:]]#erase_history[[:space:]]# ]]
-}
-zshaddhistory_functions+=(zshaddhistory_erase_history)
-
 # Path Options
 #
 # Set PATH so it includes local system admin programs.
@@ -45,6 +36,11 @@ if [[ -d "${HOME}/.local/info" ]]; then
   export INFOPATH="${HOME}/.local/info:${INFOPATH}"
 fi
 
+# iTerm2 integration
+#
+# Load the iTerm2 shell integration script.
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 # Editor Options
 #
 # Set the default text editor to use with various
@@ -54,7 +50,7 @@ export VISUAL="$EDITOR";
 
 # Apple
 #
-# On macOS tell ssh-add to use the keychain.
+# On macOS configure ssh-add for keychain.
 if [[ "$(uname -s)" == "Darwin" ]]; then
   export APPLE_SSH_ADD_BEHAVIOR=macos
   /usr/bin/ssh-add --apple-load-keychain -q
