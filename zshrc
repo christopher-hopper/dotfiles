@@ -36,11 +36,6 @@ if [[ -d "${HOME}/.local/info" ]]; then
   export INFOPATH="${HOME}/.local/info:${INFOPATH}"
 fi
 
-# iTerm2 integration
-#
-# Load the iTerm2 shell integration script.
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 # Editor Options
 #
 # Set the default text editor to use with various
