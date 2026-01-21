@@ -6,7 +6,7 @@
 # zmodload zsh/zprof
 
 # Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]] && [[ -z "$INTELLIJ_ENVIRONMENT_READER" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
