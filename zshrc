@@ -3,6 +3,8 @@
 # Executes commands at the start of an interactive session.
 #
 
+# zmodload zsh/zprof
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -88,4 +90,6 @@ fi
 
 # semantic version sv4git config.
 export SV4GIT_HOME="$HOME/.sv4git"
+
+# zprof
 
