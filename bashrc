@@ -81,8 +81,8 @@ export HISTCONTROL="${HISTCONTROL}${HISTCONTROL+,}ignoredups"
 shopt -s histappend
 #
 # Set the History length.
-export HISTSIZE=1000
-export HISTFILESIZE=2000
+export HISTSIZE=5000
+export HISTFILESIZE=10000
 
 # Path Options
 #
