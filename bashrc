@@ -168,10 +168,16 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 fi
 
 # Add nvm (Node Version Manager) support.
-export NVM_DIR="${HOME}/.nvm"
-export NVM_SYMLINK_CURRENT=true
-[[ -s "$NVM_DIR/nvm.sh" ]] && \. "$NVM_DIR/nvm.sh"
-[[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
+# export NVM_DIR="${HOME}/.nvm"
+# export NVM_SYMLINK_CURRENT=true
+# [[ -s "$NVM_DIR/nvm.sh" ]] && \. "$NVM_DIR/nvm.sh"
+# [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
+
+# Add fnm (Fast Node Manager) support.
+FNM_PATH="/opt/homebrew/opt/fnm/bin"
+if [ -d "$FNM_PATH" ]; then
+  eval "`fnm env`"
+fi
 
 # Homebrew unversioned Python.
 if [[ -d "$(brew --prefix 2>/dev/null)/opt/python/libexec/bin" ]]; then
