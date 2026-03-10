@@ -10,11 +10,12 @@
 
 # Options
 # =======
+#copy-on-select="clipboard"
 right-click-action="copy-or-paste"
 
 # Theme and display
 # =================
-theme="light:Builtin Solarized Light,dark:Builtin Solarized Dark"
+theme="light:Selenized Light,dark:Solarized Dark Patched"
 font-family="Menlo"
 
 cursor-style="block"
